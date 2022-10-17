@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title> Validação de E-mail com JavaScript</title>
+<script language="Javascript">
+
+function validacaoEmail(field) {
+usuario = field.value.substring(0, field.value.indexOf("@"));
+dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
+
+if ((usuario.lenght >=1) && //Tamanho de usuário maior ou igual a 1 caracter
+     (dominio.lenght >=3) && //Tamanho do domínio maior ou igual a 3 caracteres
+     (usuario.search("@")==-1) && //Usuário não pode conter o @
+     (dominio.search("@")==-1) && //Domínio não pode conter o @
+     (usuario.search(" ")==-1) && //Usuário não pode conter o “ ” espaço em branco
+     (dominio.search(" ")==-1) && //Domínio não pode conter o “ ” espaço em branco
+     (dominio.search(".")!=-1) && //Domínio tem que possuir “.” Ponto
+     (dominio.indexOf(".") >=1) && //A posição do primeiro ponto tem que ser maior ou igual a 1
+     //, lembrando a posição 0 deve ser ocupado por algum caracter após o @
+     (dominio.lastIndexOf(".") < dominio.length - 1)) {//A posição do ultimo ponto tem que ser menor que o ultimo caracter
+       // , deve ser finalizado o domínio por um caracter  
+
+document.getElementById("msgemail").innerHTML="E-mail válido";
+alert("E-mail válido");
+}
+else{
+document.getElementById("msgemail").innerHTML="<font color='red'>Email inválido </font>";
+alert("E-mail inválido");
+}
+}
+</script>
+</head>
+<body>
+<form name="f1">
+<h3> Validação de E-mail com JavaScript</h3>
+<hr color='gray'>
+<table>
+<tr>
+<td>
+E-mail:
+<input type="text" name="email" onblur="validacaoEmail(f1.email)"  maxlength="60" size='65'>
+</td>
+<td>
+<div id="msgemail"></div>
+</td>
+</tr>
+</table>
+<hr color='gray'>
+</form>
+</body>
+</html>
